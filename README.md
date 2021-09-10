@@ -21,11 +21,6 @@ scope.
 
 * A base Viewmodel class based on ChangeNotifier that makes it easy to implement the MVVM architecture.
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
 ## Usage
 
 ### Creating Viewmodels

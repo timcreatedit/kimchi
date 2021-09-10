@@ -1,5 +1,12 @@
+import 'package:kimchi/src/datasource.dart';
 import 'package:riverpod/riverpod.dart';
 
+/// Repositories are higher-level services that depend on [Datasource]s or other
+/// Repositories to combine their functionalities into logical operations.
+///
+/// Example: An ``AuthenticationRepository`` exposes a ``signUp()`` method that
+/// uses an ``AuthenticationDatasource`` and a ``UserDatabaseDatasource`` to
+/// both authenticate the user and create their account data in the database.
 abstract class Repository {
   Repository(this.reader);
 

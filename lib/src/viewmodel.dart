@@ -3,6 +3,16 @@ import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
+/// A Viewmodel encompasses the UI state and business logic for a single UI
+/// component.
+///
+/// Providing a Viewmodel should be done using [ChangeNotifier.autoDispose()],
+/// in rare cases the ``autoDispose()`` can be omitted, if the ViewModel should
+/// keep its state even when the View is not needed anymore.
+///
+/// Ideally, it shouldn't contain any dependency on UI packages.
+/// If state was updated, call ``notifyListeners();`` to tell flutter to rebuild
+/// the UI.
 abstract class Viewmodel extends ChangeNotifier {
   @mustCallSuper
   Viewmodel(this.reader) {

@@ -47,7 +47,8 @@ abstract class Viewmodel extends ChangeNotifier {
   ///
   /// The Viewmodel is [busy] while this method runs, this is useful for
   /// fetching data for example.
-  Future<void> init();
+  @protected
+  Future<void> init() async {}
 
   /// Discards any resources used by the viewmodel and also disposes all
   /// subscriptions in [compositeSubscription].

@@ -1,3 +1,8 @@
+## 0.0.4
+
+* New ``HistoryStateNotifier`` is like a normal StateNotifier but supports
+undo and redo functionality
+
 ## 0.0.3
 
 * ``init()`` is now protected and optional

@@ -1,7 +1,11 @@
+## 0.0.5
+
+* ``HistoryStateNotifier`` is now abstract
+* Fixed: ``Viewmodel.init()`` is no longer abstract
+
 ## 0.0.4
 
-* New ``HistoryStateNotifier`` is like a normal StateNotifier but supports
-undo and redo functionality
+* New ``HistoryStateNotifier`` is like a normal StateNotifier but supports undo and redo functionality
 
 ## 0.0.3
 

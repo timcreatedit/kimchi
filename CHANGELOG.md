@@ -1,3 +1,7 @@
+## 0.0.3
+
+* ``init()`` is now protected and optional
+
 ## 0.0.2
 
 * Added ``init()`` method to Viewmodel

@@ -1,6 +1,6 @@
 name: kimchi
 description: Kimchi is a super lightweight framework for state management based on Riverpod.
-version: 0.0.5
+version: 0.0.6
 repository: https://github.com/timcreatedit/kimchi
 
 environment:

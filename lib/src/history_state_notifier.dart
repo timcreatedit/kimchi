@@ -18,7 +18,14 @@ abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
   /// Updating the state will throw if at least one listener throws.
   @override
   set state(T value) {
-    _commitToHistory(value);
+    if (_undoHistory.isEmpty || value != _undoHistory[0]) {
+      if (_undoIndex > 0) {
+        _undoHistory = _undoHistory.sublist(_undoIndex, _undoHistory.length);
+        _undoIndex = 0;
+      }
+      _undoHistory.insert(0, value);
+    }
+
     super.state = value;
   }
 
@@ -46,23 +53,14 @@ abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
   /// Returns to the previous state in the history.
   void undo() {
     if (_undoIndex + 1 < _undoHistory.length) {
-      state = _undoHistory[++_undoIndex];
+      temporaryState = _undoHistory[++_undoIndex];
     }
   }
 
   /// Proceeds to the next state in the history.
   void redo() {
     if (_undoIndex > 0) {
-      state = _undoHistory[--_undoIndex];
+      temporaryState = _undoHistory[--_undoIndex];
     }
-  }
-
-  void _commitToHistory(T state) {
-    if (_undoHistory.isNotEmpty && state == _undoHistory[0]) return;
-    if (_undoIndex > 0) {
-      _undoHistory = _undoHistory.sublist(_undoIndex, _undoHistory.length);
-      _undoIndex = 0;
-    }
-    _undoHistory.insert(0, state);
   }
 }

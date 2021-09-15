@@ -1,3 +1,7 @@
+## 0.0.6
+
+* Fixed: Stupid bug with undo history
+
 ## 0.0.5
 
 * ``HistoryStateNotifier`` is now abstract

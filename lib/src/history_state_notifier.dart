@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 
-class HistoryStateNotifier<T> extends StateNotifier<T> {
+abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
   HistoryStateNotifier(T state) : super(state) {
     _undoHistory = [state];
   }

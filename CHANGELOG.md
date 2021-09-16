@@ -1,3 +1,9 @@
+## 0.0.7
+
+* Added a few helper methods to ``HistoryStateNotifier``
+* You can now specify whether you want ``HistoryStateNotifier`` to add the initial state to the history
+by using a parameter in its constructor.
+
 ## 0.0.6
 
 * Fixed: Stupid bug with undo history

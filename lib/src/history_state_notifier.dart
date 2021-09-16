@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 
 abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
-  HistoryStateNotifier(T state) : super(state) {
-    _undoHistory = [state];
+  HistoryStateNotifier(T state, {bool temporary = false}) : super(state) {
+    _undoHistory = temporary ? [] : [state];
   }
 
   late List<T> _undoHistory;
@@ -19,10 +19,7 @@ abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
   @override
   set state(T value) {
     if (_undoHistory.isEmpty || value != _undoHistory[0]) {
-      if (_undoIndex > 0) {
-        _undoHistory = _undoHistory.sublist(_undoIndex, _undoHistory.length);
-        _undoIndex = 0;
-      }
+      clearRedoQueue();
       _undoHistory.insert(0, value);
     }
 
@@ -50,17 +47,40 @@ abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
   /// Whether a redo operation is currently possible.
   bool get canRedo => (_undoIndex > 0);
 
+  /// You can override this to prevent undo/redo operations in certain cases
+  /// (e.g. when in a loading state)
+  bool get allowOperations => true;
+
   /// Returns to the previous state in the history.
   void undo() {
-    if (_undoIndex + 1 < _undoHistory.length) {
+    if (canUndo && allowOperations) {
       temporaryState = _undoHistory[++_undoIndex];
     }
   }
 
   /// Proceeds to the next state in the history.
   void redo() {
-    if (_undoIndex > 0) {
+    if (canRedo && allowOperations) {
       temporaryState = _undoHistory[--_undoIndex];
     }
+  }
+
+  /// Removes all history items from the queue.
+  void clearQueue() {
+    _undoHistory = [];
+    _undoIndex = 0;
+    temporaryState = state;
+  }
+
+  /// Removes all history items that happened after the current undo position.
+  ///
+  /// Internally this is used whenever a change occurs, but you might want to
+  /// use it for something else.
+  void clearRedoQueue() {
+    if (canRedo) {
+      _undoHistory = _undoHistory.sublist(_undoIndex, _undoHistory.length);
+      _undoIndex = 0;
+    }
+    temporaryState = state;
   }
 }

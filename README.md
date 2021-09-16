@@ -19,11 +19,22 @@ scope.
 
 ## Features
 
+* HistoryStateNotifier as a variation on StateNotifier that includes undo/redo functionality
 * A base Viewmodel class based on ChangeNotifier that makes it easy to implement the MVVM architecture.
+* Base classes for repositories that are currently almost blank but will include useful features at some point (hopefully).
 
 ## Usage
 
-### Creating Viewmodels
+### HistoryStateNotifier
+This abstract class works just like ``StateNotifier``, with a few added bonuses:
+
+* Each change to the ``state`` gets recorded in an internal history
+* Using ``undo()`` and ``redo()`` you can navigate through this history
+* If you want to update the state without adding it to the history (e.g. for loading states), use the ``temporaryState``
+  setter.
+
+### Viewmodels
+#### Creating Viewmodels
 
 A basic Viewmodel would look like this.
 
@@ -51,7 +62,7 @@ class ExampleViewmodel extends Viewmodel {
 ```
 Note the use of ``notifyListeners();`` after a change that is supposed to update the UI.
 
-### Creating Viewmodels
+#### Using Viewmodels
 Kimchi doesn't force you to use a specific flavor of Riverpod, the concepts apply to all of them.
 
 Using [hooks_riverpod](https://pub.dev/packages/hooks_riverpod) for example, you can then obtain access to the viewmodel from the

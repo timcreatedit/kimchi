@@ -61,6 +61,15 @@ abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
   /// (e.g. when in a loading state)
   bool get allowOperations => true;
 
+  /// You can override this function if you want to transform states from the
+  /// history before they get applied.
+  ///
+  /// This can be useful if your state contains values that aren't supposed
+  /// to be changed upon undoing for example.
+  T applyHistoryState(T state) {
+    return state;
+  }
+
   /// Returns to the previous state in the history.
   void undo() {
     if (canUndo && allowOperations) {

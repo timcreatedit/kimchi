@@ -2,9 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 
 abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
-  HistoryStateNotifier(T state, {bool temporary = false}) : super(state) {
+  HistoryStateNotifier(
+    T state, {
+    bool temporary = false,
+    this.maxHistoryLength = 30,
+  }) : super(state) {
     _undoHistory = temporary ? [] : [state];
   }
+
+  /// How many states this state notifier will keep track of
+  final int maxHistoryLength;
 
   late List<T> _undoHistory;
   int _undoIndex = 0;
@@ -21,6 +28,9 @@ abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
     if (_undoHistory.isEmpty || value != _undoHistory[0]) {
       clearRedoQueue();
       _undoHistory.insert(0, value);
+      if (_undoHistory.length > maxHistoryLength) {
+        _undoHistory = _undoHistory.sublist(0, maxHistoryLength);
+      }
     }
 
     super.state = value;

@@ -1,7 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 
+/// Works like a [StateNotifier] with the added benefit of maintaining an
+/// internal undo history that can be navigated through.
+///
+/// All states that get set using the [state] setter will automatically be
+/// remembered for up to [maxHistoryLength] entries. If you want to update
+/// the state without adding it to the history, use the [temporaryState] setter
+/// instead.
 abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
+
+  /// Constructs a new HistoryStateNotifier with a given state as its initial
+  /// state.
+  ///
+  /// By default, the initial state will be added to the history, so it can be
+  /// returned to by undoing. If this is not what you want, set [temporary] to
+  /// true.
+  /// You can set how many states you want stored using [maxHistoryLength],
+  /// which is set to 30 by default.
   HistoryStateNotifier(
     T state, {
     bool temporary = false,

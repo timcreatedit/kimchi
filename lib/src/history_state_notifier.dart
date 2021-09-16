@@ -66,21 +66,21 @@ abstract class HistoryStateNotifier<T> extends StateNotifier<T> {
   ///
   /// This can be useful if your state contains values that aren't supposed
   /// to be changed upon undoing for example.
-  T applyHistoryState(T state) {
+  T transformHistoryState(T state) {
     return state;
   }
 
   /// Returns to the previous state in the history.
   void undo() {
     if (canUndo && allowOperations) {
-      temporaryState = _undoHistory[++_undoIndex];
+      temporaryState = transformHistoryState(_undoHistory[++_undoIndex]);
     }
   }
 
   /// Proceeds to the next state in the history.
   void redo() {
     if (canRedo && allowOperations) {
-      temporaryState = _undoHistory[--_undoIndex];
+      temporaryState = transformHistoryState(_undoHistory[--_undoIndex]);
     }
   }
 

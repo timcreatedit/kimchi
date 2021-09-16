@@ -1,3 +1,6 @@
+## 0.0.8
+* Added maxHistoryLength parameter to ``HistoryStateNotifier``
+
 ## 0.0.7
 
 * Added a few helper methods to ``HistoryStateNotifier``

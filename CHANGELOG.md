@@ -1,3 +1,7 @@
+## 0.0.9
+* Better documentation for ``HistoryStateNotifier``
+* Added the possibility to transform states from the history before they get applied
+
 ## 0.0.8
 * Added maxHistoryLength parameter to ``HistoryStateNotifier``
 

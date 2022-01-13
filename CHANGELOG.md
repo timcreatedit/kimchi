@@ -1,3 +1,7 @@
+## 0.1.0
+* Dependency Upgrades
+###BREAKING:
+* Removed ``HistoryStateNotifier`` check out the ``history_state_notifier`` package
 ## 0.0.9
 * Better documentation for ``HistoryStateNotifier``
 * Added the possibility to transform states from the history before they get applied

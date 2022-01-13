@@ -1,6 +1,6 @@
 name: kimchi
 description: Kimchi is a super lightweight framework for state management based on Riverpod.
-version: 0.0.9
+version: 0.1.0
 repository: https://github.com/timcreatedit/kimchi
 
 environment:
@@ -10,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  riverpod: ^0.14.0+3
-  rxdart: ^0.27.2
+  riverpod: ^1.0.3
+  rxdart: ^0.27.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 flutter:

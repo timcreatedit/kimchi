@@ -1,3 +1,6 @@
+## 0.1.1
+* Fixed leftover export of history_state_notifier
+
 ## 0.1.0
 * Dependency Upgrades
 ###BREAKING:
